@@ -1,16 +1,29 @@
+import { appReducer, appEffects } from './domain/store/index';
+import { LayoutModule } from './presentation/layout/layout.module';
+import { CoreModule } from './core/core.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoreModule,
+    LayoutModule,
+    StoreModule.forRoot(appReducer),
+    EffectsModule.forRoot(appEffects),
+    StoreDevtoolsModule.instrument({
+      maxAge:25
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
